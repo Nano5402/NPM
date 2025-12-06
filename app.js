@@ -1,38 +1,124 @@
-import nombre from 'prompt-sync';
-import { calcularPromedio, calcularSalarioBase, calcularDeducciones, calcularNeto } from './modulos/index.js';
+import PromptSync from 'prompt-sync';
+import { calcularPromedio, calcularInventario, calcularPromedio,} from './modulos/index.js';
 const intro = nombre();
 
 
-const prompt = nombre();
+const prompt = PromptSync();
 
-// // Pedimos al usuario la cantidad de notas que desea ingresar
-// const cantidad = parseInt(prompt("¿Cuántas notas desea ingresar? "));
+// Ejercicio 1
+// Función que ejecuta el Ejercicio 1
+function ejercicio1() {
+  console.log("=== Ejercicio 1: Calcular promedio de notas ===");
 
-// // Creamos un arreglo vacío para almacenar las notas
-// const notas = [];
+  // Pedimos la cantidad de notas
+  const cantidad = parseInt(prompt("¿Cuántas notas desea ingresar? "));
 
-// // Usamos un ciclo for para pedir cada nota al usuario
-// for (let i = 0; i < cantidad; i++) {
-//     const nota = parseFloat(prompt(`Ingrese la nota ${i + 1}: `));
-//     notas.push(nota);
-// }
+  // Creamos un arreglo vacío para almacenar las notas
+  const notas = [];
 
-// // Llamamos a la función calcularPromedio con el arreglo de notas
-// const resultado = calcularPromedio(notas);
+  // Usamos un ciclo for para pedir cada nota
+  for (let i = 0; i < cantidad; i++) {
+    const nota = parseFloat(prompt(`Ingrese la nota #${i + 1}: `));
+    notas.push(nota);
+  }
 
-// // Mostramos el resultado en consola
-// console.log(`Su promedio final es: ${resultado.promedio.toFixed(1)}\nRendimiento: ${resultado.rendimiento}`);
+  // Calculamos el promedio usando la función auxiliar
+  const promedio = calcularPromedio(notas);
 
-// Pedimos al usuario los datos
-const valorHora = parseFloat(prompt("Ingrese el valor de la hora: "));
-const horasTrabajadas = parseInt(prompt("Ingrese la cantidad de horas trabajadas: "));
+  // Mostramos el resultado
+  console.log(`El promedio de las notas es: ${promedio.toFixed(2)}`);
+}
 
-// Usamos las funciones exportadas
-const salarioBase = calcularSalarioBase(valorHora, horasTrabajadas);
-const deducciones = calcularDeducciones(salarioBase);
-const salarioNeto = calcularNeto(salarioBase, deducciones);
+// Ejecutamos directamente el ejercicio
+ejercicio1();
 
-// Mostramos los resultados
-console.log(`Salario base: $${salarioBase}`);
-console.log(`Deducciones: $${deducciones}`);
-console.log(`Salario neto: $${salarioNeto}`);
+
+// Ejercicio 2 
+// Función que ejecuta la lógica del Ejercicio 2
+function ejercicio2() {
+  console.log("=== Ejercicio 2: Inventario con validación persistente ===");
+
+  // Creamos un arreglo vacío para almacenar los productos
+  const inventario = [];
+
+  // Pedimos al usuario la cantidad de productos que desea registrar
+  const cantidad = parseInt(prompt("¿Cuántos productos desea registrar? "));
+
+  // Usamos un ciclo for para pedir los datos de cada producto
+  for (let i = 0; i < cantidad; i++) {
+    let nombre;
+    let cantidadProducto;
+
+    // Validación persistente: repetimos hasta que el usuario ingrese un nombre válido
+    do {
+      nombre = prompt(`Ingrese el nombre del producto #${i + 1}: `);
+    } while (!nombre || nombre.trim() === "");
+
+    // Validación persistente: repetimos hasta que el usuario ingrese una cantidad válida
+    do {
+      cantidadProducto = parseInt(prompt(`Ingrese la cantidad del producto "${nombre}": `));
+    } while (isNaN(cantidadProducto) || cantidadProducto < 0);
+
+    // Agregamos el producto al inventario
+    inventario.push({ nombre, cantidad: cantidadProducto });
+  }
+
+  // Mostramos el inventario en consola
+  console.log("Inventario registrado:");
+  inventario.forEach(p => console.log(`${p.nombre}: ${p.cantidad}`));
+
+  // Ejemplo de uso de la función auxiliar calcularInventario
+  const cantidadInicial = parseInt(prompt("Ingrese cantidad inicial: "));
+  const cantidadVendida = parseInt(prompt("Ingrese cantidad vendida: "));
+  const cantidadRecibida = parseInt(prompt("Ingrese cantidad recibida: "));
+
+  const resultado = calcularInventario(cantidadInicial, cantidadVendida, cantidadRecibida);
+  console.log(resultado);
+}
+
+// Ejecutamos directamente el ejercicio
+ejercicio2();
+
+// Ejercicio 3
+// Función que ejecuta la lógica del Ejercicio 3
+function ejercicio3() {
+  console.log("=== Ejercicio 3: Promedio de notas ===");
+
+  // Pedimos al usuario la cantidad de notas
+  const cantidad = parseInt(prompt("¿Cuántas notas desea ingresar? "));
+
+  // Creamos un arreglo vacío para almacenar las notas
+  const notas = [];
+
+  // Usamos un ciclo for para pedir cada nota
+  for (let i = 0; i < cantidad; i++) {
+    const nota = parseFloat(prompt(`Ingrese la nota #${i + 1}: `));
+    notas.push(nota);
+  }
+
+  // Llamamos a la función calcularPromedio
+  const resultado = calcularPromedio(notas);
+
+  // Mostramos el resultado en consola
+  console.log(`Su promedio final es: ${resultado.promedio.toFixed(1)}`);
+  console.log(`Rendimiento: ${resultado.rendimiento}`);
+}
+
+// Ejecutamos directamente el ejercicio
+ejercicio3();
+
+
+// Ejercicio 4
+// // Pedimos al usuario los datos
+// const valorHora = parseFloat(prompt("Ingrese el valor de la hora: "));
+// const horasTrabajadas = parseInt(prompt("Ingrese la cantidad de horas trabajadas: "));
+
+// // Usamos las funciones exportadas
+// const salarioBase = calcularSalarioBase(valorHora, horasTrabajadas);
+// const deducciones = calcularDeducciones(salarioBase);
+// const salarioNeto = calcularNeto(salarioBase, deducciones);
+
+// // Mostramos los resultados
+// console.log(`Salario base: $${salarioBase}`);
+// console.log(`Deducciones: $${deducciones}`);
+// console.log(`Salario neto: $${salarioNeto}`);
