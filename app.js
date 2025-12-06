@@ -1,5 +1,5 @@
 import PromptSync from 'prompt-sync';
-import { calcularPromedio, calcularInventario, calcularPromedio,} from './modulos/index.js';
+import { calcularPromedio, calcularInventario, calcularPromedio, ordenarProductos, validarUsuario} from './modulos/index.js';
 const intro = nombre();
 
 
@@ -109,6 +109,39 @@ ejercicio3();
 
 
 // Ejercicio 4
+// Función que ejecuta la lógica del Ejercicio 4
+function ejercicio4() {
+  console.log("=== Ejercicio 4: Ordenamiento de precios ===");
+
+  // Pedimos al usuario la cantidad de productos
+  const cantidad = parseInt(prompt("¿Cuántos productos desea ingresar? "));
+
+  // Creamos un arreglo vacío para almacenar los objetos
+  const productos = [];
+
+  // Usamos un ciclo for para pedir cada producto y su precio
+  for (let i = 0; i < cantidad; i++) {
+    const nombre = prompt(`Ingrese el nombre del producto #${i + 1}: `);
+    const precio = parseFloat(prompt(`Ingrese el precio del producto "${nombre}": `));
+
+    // Creamos un objeto y lo agregamos al arreglo
+    productos.push({ nombre, precio });
+  }
+
+  // Llamamos a la función ordenarProductos con el arreglo de objetos
+  const resultado = ordenarProductos(productos);
+
+  // Mostramos los resultados en consola
+  console.log("\nProductos originales:", productos);
+  console.log("Productos ordenados (mayor a menor por precio):");
+  resultado.ordenados.forEach(p => console.log(`${p.nombre}: $${p.precio}`));
+
+  console.log(`\nProducto más caro: ${resultado.productoMaximo.nombre} ($${resultado.productoMaximo.precio})`);
+  console.log(`Producto más barato: ${resultado.productoMinimo.nombre} ($${resultado.productoMinimo.precio})`);
+}
+
+// Ejecutamos directamente el ejercicio
+ejercicio4();
 // // Pedimos al usuario los datos
 // const valorHora = parseFloat(prompt("Ingrese el valor de la hora: "));
 // const horasTrabajadas = parseInt(prompt("Ingrese la cantidad de horas trabajadas: "));

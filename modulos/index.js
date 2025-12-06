@@ -1,4 +1,6 @@
 export { calcularPromedio } from './ejercicio1/ejercicio1.js'
 export { calcularInventario } from './ejercicio2/ejercicio2.js'
 export { calcularPromedio } from './ejercicio3/ejercicio3.js'
+export { ordenarProductos } from './ejercicio4/ejercicio4.js'
+export { validarUsuario } from './ejercicio5/ejercicio5.js'
 export { calcularSalarioBase, calcularDeducciones, calcularNeto } from './ejercicio6/ejercicio6.js'
