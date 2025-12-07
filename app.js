@@ -1,5 +1,5 @@
 import PromptSync from 'prompt-sync';
-import { calcularPromedio, calcularInventario, calcularPromedio, ordenarProductos, validarUsuario} from './modulos/index.js';
+import { calcularPromedio, calcularInventario, calcularPromedio, ordenarProductos, validarUsuario,calcularSalarioBase, calcularDeducciones, calcularNeto, registrarProductos, } from './modulos/index.js';
 const intro = nombre();
 
 
@@ -142,16 +142,76 @@ function ejercicio4() {
 
 // Ejecutamos directamente el ejercicio
 ejercicio4();
-// // Pedimos al usuario los datos
-// const valorHora = parseFloat(prompt("Ingrese el valor de la hora: "));
-// const horasTrabajadas = parseInt(prompt("Ingrese la cantidad de horas trabajadas: "));
 
-// // Usamos las funciones exportadas
-// const salarioBase = calcularSalarioBase(valorHora, horasTrabajadas);
-// const deducciones = calcularDeducciones(salarioBase);
-// const salarioNeto = calcularNeto(salarioBase, deducciones);
+// Ejercicio 5
+// Función que ejecuta la lógica del Ejercicio 5
+function ejercicio5() {
+  console.log("=== Ejercicio 5: Validación de usuario y permisos ===");
 
-// // Mostramos los resultados
-// console.log(`Salario base: $${salarioBase}`);
-// console.log(`Deducciones: $${deducciones}`);
-// console.log(`Salario neto: $${salarioNeto}`);
+  // Pedimos los datos del usuario
+  const nombre = prompt("Ingrese el nombre del usuario: ");
+  const estado = prompt("Ingrese el estado del usuario (activo/inactivo): ");
+  const rol = prompt("Ingrese el rol del usuario (admin/editor/lector): ");
+
+  // Creamos el objeto usuario
+  const usuario = { nombre, estado, rol };
+
+  // Validamos el usuario llamando a la función importar desde ejercicio5.js
+  const resultado = validarUsuario(usuario);
+
+  // Mostramos el resultado en consola
+  console.log(resultado.acceso);
+  console.log(resultado.permisos);
+}
+
+// Ejecutamos directamente el ejercicio
+ejercicio5();
+
+// Función que ejecuta la lógica del Ejercicio 6
+function ejercicio6() {
+  console.log("=== Ejercicio 6: Cálculo de salario neto ===");
+
+  // Pedimos al usuario los datos
+  const valorHora = parseFloat(prompt("Ingrese el valor de la hora: "));
+  const horasTrabajadas = parseInt(prompt("Ingrese la cantidad de horas trabajadas: "));
+
+  // Usamos las funciones exportadas
+  const salarioBase = calcularSalarioBase(valorHora, horasTrabajadas);
+  const deducciones = calcularDeducciones(salarioBase);
+  const salarioNeto = calcularNeto(salarioBase, deducciones);
+
+  // Mostramos los resultados
+  console.log(`Salario base: $${salarioBase}`);
+  console.log(`Deducciones: $${deducciones}`);
+  console.log(`Salario neto: $${salarioNeto}`);
+}
+
+// Ejecutamos directamente el ejercicio
+ejercicio6();
+
+// Función que ejecuta la lógica del Ejercicio 7
+function ejercicio7() {
+  console.log("=== Ejercicio 7: Registro de productos sin duplicados ===");
+
+  // Pedimos al usuario cuántos productos quiere ingresar
+  const cantidad = parseInt(prompt("¿Cuántos productos desea registrar? "));
+
+  // Creamos un arreglo vacío para almacenar los productos
+  const productos = [];
+
+  // Usamos un ciclo for para pedir cada producto
+  for (let i = 0; i < cantidad; i++) {
+    const producto = prompt(`Ingrese el nombre del producto #${i + 1}: `);
+    productos.push(producto);
+  }
+
+  // Registramos los productos usando la función con parámetros rest
+  const listaFinal = registrarProductos(...productos);
+
+  // Mostramos la lista final en consola
+  console.log("\nLista final de productos sin duplicados:");
+  console.log(listaFinal.join(", "));
+}
+
+// Ejecutamos directamente el ejercicio
+ejercicio7();

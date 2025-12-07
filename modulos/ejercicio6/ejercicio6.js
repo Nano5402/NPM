@@ -1,3 +1,5 @@
+// ejercicio6.js
+
 // Función para calcular el salario base
 function calcularSalarioBase(valorHora, horasTrabajadas) {
   return valorHora * horasTrabajadas;
